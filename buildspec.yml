@@ -1,24 +1,24 @@
 version: 0.2
+
 phases:
   install:
     runtime-versions:
-      Python: 3.10.2
+      python: 3.7
     commands:
-      - echo Installing
-  pre_build:
-    commands:
-      - echo Installing source NPM dependencies.
-      - apt-get install python3.10
-      - apt-get install python3-pip
-      - pip install django
+      # Install dependencies needed for running tests
+      - echo Installing dependencies
+      - pip install -r requirements.txt
+
   build:
     commands:
       - echo Build started on `date`
-      - echo Compiling the Node.js code
-      - python manage.py runserver
+      - echo Running tests
+      - python3 manage.py test
+
   post_build:
     commands:
       - echo Build completed on `date`
+
 artifacts:
   files:
     - '**/*'
